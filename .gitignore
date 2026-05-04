@@ -6,6 +6,7 @@ venv/
 notebooks/books_data/
 # C extensions
 *.so
+notebooks/artifacts/books.csv
 
 # Distribution / packaging
 .Python
