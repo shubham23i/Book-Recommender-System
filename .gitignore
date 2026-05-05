@@ -7,7 +7,7 @@ notebooks/books_data/
 # C extensions
 *.so
 notebooks/artifacts/books.csv
-
+notebooks/artifacts/*.pkl
 # Distribution / packaging
 .Python
 build/
