@@ -1,0 +1,9 @@
+artifact_config:
+  artifact_directory: artifacts
+
+data_ingestion_config:
+  dataset_download_url: https://github.com/entbappy/Branching-tutorial/raw/master/books_data.zip
+  dataset_dir: dataset
+  ingested_dir: ingested
+  raw_data_dir: raw_data
+  
