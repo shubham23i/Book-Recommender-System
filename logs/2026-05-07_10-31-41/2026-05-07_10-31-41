@@ -1,0 +1,2 @@
+[ 2026-05-07 10:31:42,482 ] 12 root - INFO - ==================== data ingestion log started ====================
+[ 2026-05-07 10:31:42,482 ] 30 root - INFO - Data ingestion config: DataIngestionConfig(dataset_download_url='https://github.com/entbappy/Branching-tutorial/raw/master/books_data.zip', ingested_dir='artifacts\\dataset\\ingested', raw_data_dir='artifacts\\dataset\\raw_data')
