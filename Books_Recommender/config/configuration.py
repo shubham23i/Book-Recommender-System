@@ -11,13 +11,13 @@ class AppConfiguration:
         try:
             self.config_info=read_yaml(file_path=config_file_path)
         except Exception as e:
-            CustomException(e,sys)
+            raise CustomException(e,sys)
 
     def get_data_ingestion_config(self)->DataIngestionConfig:
         try:
             data_ingestion_config=self.config_info['data_ingestion_config']
-            artifacts_dir=self.data_ingestion_config['artifacts_config']['artifact_dir']
-            dataset_dir=self.config_info['dataset_dir']
+            artifacts_dir=self.config_info['artifacts_config']['artifacts_directory']
+            dataset_dir=self.config_info['data_ingestion_config']['dataset_dir']
 
             ingested_data_dir=os.path.join(artifacts_dir,dataset_dir,data_ingestion_config['ingested_dir'])
             raw_data_dir=os.path.join(artifacts_dir,dataset_dir,data_ingestion_config['raw_data_dir'])
@@ -30,6 +30,6 @@ class AppConfiguration:
             logging.info(f'Data ingestion config: {response}')
             return response
         except Exception as e:  
-            CustomException(e,sys)
+            raise CustomException(e,sys)
 
 

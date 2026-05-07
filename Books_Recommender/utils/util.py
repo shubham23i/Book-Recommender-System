@@ -1,5 +1,5 @@
 import sys
-import PyYAML  as yaml
+import yaml
 from Books_Recommender.exception.exception_handler import CustomException
 from Books_Recommender.logger.log import logging
 
