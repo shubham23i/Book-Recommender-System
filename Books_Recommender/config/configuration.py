@@ -3,7 +3,7 @@ import sys
 from Books_Recommender.exception.exception_handler import CustomException
 from Books_Recommender.logger.log import logging
 from Books_Recommender.utils.util import read_yaml
-from Books_Recommender.entity.config_entity import DataIngestionConfig, DataValidationConfig
+from Books_Recommender.entity.config_entity import DataIngestionConfig, DataValidationConfig, DataTransformationConfig, ModelTrainerConfig
 from Books_Recommender.constant import *
 
 class AppConfiguration:
@@ -57,3 +57,49 @@ class AppConfiguration:
             return response
         except Exception as e:
             raise CustomException(e,sys)
+        
+    
+    def get_data_transformation_config(self)->DataTransformationConfig:
+        try:
+            data_transformation_config=self.config_info['data_transformation_config']
+            data_validation_config=self.config_info['data_validation_config']
+            data_ingestion_config=self.config_info['data_ingestion_config']
+            dataset_dir=self.config_info['data_ingestion_config']['dataset_dir']
+            artifacts_directory=self.config_info['artifacts_config']['artifacts_directory']
+
+            clean_data_path=os.path.join(artifacts_directory,dataset_dir,data_validation_config['clean_data_dir'])
+            transformed_data_dir=os.path.join(artifacts_directory,dataset_dir,data_transformation_config['data_transformation_dir'])
+             
+            response=DataTransformationConfig(
+                clean_data_dir=clean_data_path,
+                data_transformation_dir=transformed_data_dir
+            )
+            logging.info(f'Data transformation config: {response}')
+            return response
+        except Exception as e:
+            raise CustomException(e,sys)
+        
+
+    def get_model_trainer_config(self,config=ModelTrainerConfig):
+        try:
+            model_trainer_config=self.config_info['model_trainer_config']
+            data_transformation_config=self.config_info['data_transformation_config']
+            data_ingestion_config=self.config_info['data_ingestion_config']
+            
+            dataset_dir=data_ingestion_config['dataset_dir']
+            artifacts_directory=self.config_info['artifacts_config']['artifacts_directory']
+
+            transformed_data_file_dir = os.path.join(artifacts_directory, dataset_dir, data_transformation_config['data_transformation_dir'])
+            trained_model_dir = os.path.join(artifacts_directory, model_trainer_config['trained_model_dir'])
+            trained_model_name = model_trainer_config['trained_model_name']
+
+            response=ModelTrainerConfig(
+                transformed_data_file_dir=transformed_data_file_dir,
+                trained_model_dir=trained_model_dir,
+                trained_model_name=trained_model_name
+            )
+            logging.info(f'Model trainer config: {response}')
+            return response
+        except Exception as e:
+            raise CustomException(e,sys)
+

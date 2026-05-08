@@ -1,0 +1,16 @@
+[ 2026-05-08 10:43:10,687 ] 12 root - INFO - ==================== data ingestion log started ====================
+[ 2026-05-08 10:43:10,687 ] 30 root - INFO - Data ingestion config: DataIngestionConfig(dataset_download_url='https://github.com/entbappy/Branching-tutorial/raw/master/books_data.zip', ingested_dir='artifacts\\dataset\\ingested', raw_data_dir='artifacts\\dataset\\raw_data')
+[ 2026-05-08 10:43:10,687 ] 56 root - INFO - Data validation config: DataValidationConfig(clean_data_dir='artifacts\\dataset\\clean_data', serialized_objects_dir='artifacts\\dataset\\serialized_objects', books_csv_file='artifacts\\dataset\\ingested\\BX-Books.csv', ratings_csv_file='artifacts\\dataset\\ingested\\BX-Book-Ratings.csv')
+[ 2026-05-08 10:43:10,687 ] 77 root - INFO - Data transformation config: DataTransformationConfig(clean_data_dir='artifacts\\dataset\\clean_data', data_transformation_dir='artifacts\\dataset\\transformed_data')
+[ 2026-05-08 10:43:10,687 ] 56 root - INFO - Data validation config: DataValidationConfig(clean_data_dir='artifacts\\dataset\\clean_data', serialized_objects_dir='artifacts\\dataset\\serialized_objects', books_csv_file='artifacts\\dataset\\ingested\\BX-Books.csv', ratings_csv_file='artifacts\\dataset\\ingested\\BX-Book-Ratings.csv')
+[ 2026-05-08 10:43:10,687 ] 24 root - INFO - downloading data from https://github.com/entbappy/Branching-tutorial/raw/master/books_data.zip to artifacts\dataset\raw_data\books_data.zip
+[ 2026-05-08 10:43:15,862 ] 26 root - INFO - unzipping data from artifacts\dataset\raw_data\books_data.zip to artifacts\dataset\raw_data
+[ 2026-05-08 10:43:16,286 ] 37 root - INFO - extracted data from artifacts\dataset\raw_data\books_data.zip to artifacts\dataset\ingested
+[ 2026-05-08 10:43:16,286 ] 45 root - INFO - ==================== data ingestion log completed ====================
+[ 2026-05-08 10:43:16,286 ] 76 root - INFO - ==================== data validation log started ====================
+[ 2026-05-08 10:43:18,294 ] 23 root - INFO - ratings shape: (1149780, 3)
+[ 2026-05-08 10:43:18,294 ] 24 root - INFO - books shape: (271360, 8)
+[ 2026-05-08 10:43:19,014 ] 59 root - INFO - final_rating shape: (57952, 9)
+[ 2026-05-08 10:43:19,330 ] 64 root - INFO - clean data saved at artifacts\dataset\clean_data
+[ 2026-05-08 10:43:19,363 ] 69 root - INFO - serialized objects saved at artifacts\dataset\serialized_objects
+[ 2026-05-08 10:43:19,363 ] 78 root - INFO - ==================== data validation log completed ====================
