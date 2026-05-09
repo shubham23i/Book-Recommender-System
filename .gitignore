@@ -8,7 +8,7 @@ notebooks/books_data/
 *.so
 notebooks/artifacts/books.csv
 notebooks/artifacts/*.pkl
-artifacts/
+
 # Distribution / packaging
 .Python
 build/
