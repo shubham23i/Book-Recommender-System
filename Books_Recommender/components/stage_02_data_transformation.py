@@ -19,7 +19,11 @@ class DataTransformation:
             file_path=os.path.join(self.data_transformation_config.clean_data_dir,"ratings.csv")
             df=pd.read_csv(file_path)
 
-            book_pivot=df.pivot(index='user_id',columns='title',values='rating')
+            book_pivot = df.pivot(
+                index='title',
+                columns='user_id',
+                values='rating'
+            )
             logging.info(f"book_pivot shape: {book_pivot.shape}")
             book_pivot.fillna(0,inplace=True)
 
@@ -27,7 +31,7 @@ class DataTransformation:
             pickle.dump(book_pivot,open(os.path.join(self.data_transformation_config.data_transformation_dir,'transformed_data.pkl'),'wb'))
             logging.info(f"serialized objects saved at {self.data_transformation_config.data_transformation_dir}")
 
-            book_names=book_pivot.index
+            book_names = book_pivot.index
 
             os.makedirs(self.data_validation_config.serialized_objects_dir,exist_ok=True)
             pickle.dump(book_names,open(os.path.join(self.data_validation_config.serialized_objects_dir, "book_names.pkl"),"wb"))

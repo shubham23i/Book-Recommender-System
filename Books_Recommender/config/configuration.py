@@ -3,7 +3,7 @@ import sys
 from Books_Recommender.exception.exception_handler import CustomException
 from Books_Recommender.logger.log import logging
 from Books_Recommender.utils.util import read_yaml
-from Books_Recommender.entity.config_entity import DataIngestionConfig, DataValidationConfig, DataTransformationConfig, ModelTrainerConfig
+from Books_Recommender.entity.config_entity import DataIngestionConfig, DataValidationConfig, DataTransformationConfig, ModelTrainerConfig, ModelRecommendationConfig
 from Books_Recommender.constant import *
 
 class AppConfiguration:
@@ -103,3 +103,39 @@ class AppConfiguration:
         except Exception as e:
             raise CustomException(e,sys)
 
+    def get_model_recommendation_config(self)->ModelRecommendationConfig:
+        try:
+            model_reccomendation_config=self.config_info['recommendation_config']
+            model_trainer_config=self.config_info['model_trainer_config']
+            data_ingestion_config=self.config_info['data_ingestion_config']
+            data_validation_config=self.config_info['data_validation_config']
+            trained_model_name=model_trainer_config['trained_model_name']
+            artifacts_directory=self.config_info['artifacts_config']['artifacts_directory']
+            trained_model_directory=os.path.join(artifacts_directory,model_trainer_config['trained_model_dir'])
+            poster_api=model_reccomendation_config['poster_url']
+
+            book_name_serialized_objects=os.path.join(artifacts_directory,data_validation_config['serialized_objects_dir'],"book_names.pkl")
+            book_pivot_serialized_objects = os.path.join(
+                                                    artifacts_directory,
+                                                    data_ingestion_config['dataset_dir'],
+                                                    data_validation_config['serialized_objects_dir'],
+                                                    "books_pivot.pkl"
+                                                )
+            final_rating_serialized_objects = os.path.join(
+                                                    artifacts_directory,
+                                                    data_ingestion_config['dataset_dir'],
+                                                    data_validation_config['serialized_objects_dir'],
+                                                    "ratings.pkl"
+                                                )
+            trained_model_path=os.path.join(trained_model_directory,trained_model_name)
+
+            response=ModelRecommendationConfig(
+                book_name_serialized_objects=book_name_serialized_objects,
+                book_pivot_serialized_objects=book_pivot_serialized_objects,
+                final_rating_serialized_objects=final_rating_serialized_objects,
+                trained_model_path=trained_model_path
+            )
+            return response
+        except Exception as e:
+            raise CustomException(e,sys)
+                                                           
